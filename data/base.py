@@ -44,7 +44,7 @@ head = """
         🌟 EARLY DIABETES RISK PREDICTION APP 🌟
     </div>
     <div style="text-align: center; font-size: 18px; color: #5D6D7E; margin-bottom: 60px;">
-        Harness the power of machine learning to predict diabetes and provide insights!
+        Harness the power of AI&ML to predict diabetes and provide insights!
     </div>
     """
 
