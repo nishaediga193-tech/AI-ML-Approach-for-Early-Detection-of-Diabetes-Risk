@@ -34,7 +34,6 @@ footer = """
     </div>
     """
 
-
 head = """
     <div style="text-align: 
     center; 
@@ -42,7 +41,7 @@ head = """
     font-weight: bold; 
     color: #2E86C1;
     margin-bottom: 20px;">
-        🌟 Diabetes Prediction App 🌟
+        🌟 EARLY DIABETES RISK PREDICTION APP 🌟
     </div>
     <div style="text-align: center; font-size: 18px; color: #5D6D7E; margin-bottom: 60px;">
         Harness the power of machine learning to predict diabetes and provide insights!
@@ -61,13 +60,14 @@ border-radius: 5px; text-align: center;">
 </div>
 """
 
+# data/base.py
 
-about_diabets = """
+about_diabetes = """
 ## What is diabetes?
 
 **Diabetes** is a chronic health condition that affects how your body turns food into energy. It is characterized by high levels of glucose (sugar) in the blood, which occurs because the body either doesn’t produce enough insulin, doesn’t use insulin effectively, or both.
 
-### **Types of Diabetes**:
+### Types of Diabetes:
 1. **Type 1 Diabetes**:
    - An autoimmune condition where the immune system attacks and destroys insulin-producing cells in the pancreas.
    - Typically diagnosed in children and young adults.
@@ -82,7 +82,7 @@ about_diabets = """
    - Occurs during pregnancy when the body cannot make enough insulin to support the increased demand.
    - Usually resolves after childbirth, but it increases the risk of developing type 2 diabetes later in life.
 
-### **Symptoms of Diabetes**:
+### Symptoms of Diabetes:
 - Frequent urination
 - Excessive thirst
 - Extreme hunger
@@ -91,18 +91,16 @@ about_diabets = """
 - Slow-healing wounds
 - Unexplained weight loss (especially in type 1 diabetes)
 
-### **Complications of Untreated Diabetes**:
+### Complications of Untreated Diabetes:
 - Heart disease
 - Kidney damage
 - Vision loss (diabetic retinopathy)
 - Nerve damage (diabetic neuropathy)
 - Increased risk of infections
 
-### **Management**:
+### Management:
 - **Diet**: Eating a balanced diet, avoiding high-sugar foods.
 - **Exercise**: Regular physical activity to improve insulin sensitivity.
 - **Medications**: Insulin therapy or oral diabetes medications.
 - **Monitoring**: Regularly checking blood glucose levels.
 """
-
-
