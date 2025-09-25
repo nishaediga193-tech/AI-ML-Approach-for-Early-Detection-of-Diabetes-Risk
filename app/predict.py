@@ -1,43 +1,39 @@
-import time
 import streamlit as st
-from loader import model, accuracy_result
-from data.config import thresholds
-from function.function import make_donut
-from data.base import mrk
+import pandas as pd
+import joblib
 
+# Load the trained model
+try:
+    model = joblib.load('models/model.pkl')
+except Exception as e:
+    st.error(f"❌ Failed to load model: {e}")
+    st.stop()
 
+# Prediction function
 def app(input_data):
-    prediction = model.predict_proba(input_data)[:, 1]
+    st.header("🔍 Diabetes Risk Prediction")
 
-    cols = st.columns(2)
+    expected_columns = ['Pregnancies', 'Glucose', 'Insulin', 'BMI', 'Age']
 
-    def stream_data():
-        is_diabetes = f'Diabetes' if prediction >= thresholds else 'No Diabetes'
-        text = f"Model Accuracy: {accuracy_result}%\n\n"
-        for word in text.split(" "):
-            yield word + " "
-            time.sleep(0.05)
-        text = f"\nPrediction: {is_diabetes}\n"
-        for word in text.split(" "):
-            yield word + " "
-            time.sleep(0.05)
-        text = f"\nProbability: {(prediction * 100).round(2)[0]}%\n"
-        for word in text.split(" "):
-            yield word + " "
-            time.sleep(0.05)
-        
-        return 80
+    if not isinstance(input_data, pd.DataFrame):
+        st.error("Input must be a pandas DataFrame.")
+        st.stop()
 
-    cols[0].write_stream(stream_data)
+    if not all(col in input_data.columns for col in expected_columns):
+        st.error(f"Missing required input columns: {expected_columns}")
+        st.stop()
 
+    try:
+        # Make prediction
+        prediction_proba = model.predict_proba(input_data)[0][1]
+        prediction_class = model.predict(input_data)[0]
 
-    is_diabetes = f'<strong>Warning:</strong> Diabetes!' if prediction >= thresholds else 'No Diabetes'
-    color = f'red' if prediction >= thresholds else 'blue'
+        # Display result
+        st.subheader(f"🎯 Diabetes Risk Probability: {prediction_proba:.2f}")
+        if prediction_class == 1:
+            st.error("⚠️ High risk of diabetes detected.")
+        else:
+            st.success("✅ Low risk of diabetes detected.")
 
-    cols[1].markdown(mrk.format(color, is_diabetes), unsafe_allow_html=True)
-    cols[1].write('\n\n\n\n\n')
-    donut_chart_population = make_donut((prediction * 100).round(2)[0], 
-                                        'Diabetes Risk',
-                                        input_color=color)
-
-    cols[1].altair_chart(donut_chart_population)
+    except Exception as e:
+        st.error(f"An error occurred during prediction: {e}")

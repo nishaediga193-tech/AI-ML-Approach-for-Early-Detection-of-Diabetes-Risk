@@ -1,51 +1,22 @@
 import streamlit as st
 import pandas as pd
 
-
 def app():
-    st.sidebar.header("Input Parameters")
+    st.sidebar.header("📝 Enter Patient Information")
 
-    # Pregnancies
-    pregnancies_value = st.sidebar.number_input(
-        'Enter value for `Pregnancies`',
-        min_value=0,
-        max_value=20,
-        value=1
-    )
+    pregnancies = st.sidebar.number_input("Pregnancies", min_value=0, max_value=20, value=1)
+    glucose = st.sidebar.number_input("Glucose", min_value=0, max_value=200, value=100)
+    insulin = st.sidebar.number_input("Insulin", min_value=0, max_value=900, value=80)
+    bmi = st.sidebar.number_input("BMI", min_value=0.0, max_value=70.0, value=25.0)
+    age = st.sidebar.number_input("Age", min_value=1, max_value=120, value=30)
 
-    # Glucose
-    glucose_value = st.sidebar.number_input(
-        'Enter value for `Glucose`',
-        min_value=0,
-        max_value=250,
-        value=100
-    )
+    input_dict = {
+        "Pregnancies": pregnancies,
+        "Glucose": glucose,
+        "Insulin": insulin,
+        "BMI": bmi,
+        "Age": age
+    }
 
-    # Insulin
-    insulin_value = st.sidebar.number_input(
-        'Enter value for `Insulin`',
-        min_value=0,
-        max_value=1000,
-        value=100
-    )
-
-    # BMI
-    bmi_value = st.sidebar.number_input(
-        'Enter value for `BMI`',
-        min_value=0.0,
-        max_value=100.0,
-        value=37.0,
-        format="%.1f"
-    )
-
-    # Age
-    age_value = st.sidebar.number_input(
-        'Enter value for `Age`',
-        min_value=0,
-        max_value=100,
-        value=25
-    )
-
-    st.sidebar.markdown('---')
-    return pd.DataFrame([[pregnancies_value, glucose_value, insulin_value, bmi_value, age_value]], 
-                        columns=['Pregnancies', 'Glucose', 'Insulin','BMI','Age'])    
+    input_df = pd.DataFrame([input_dict])
+    return input_df
