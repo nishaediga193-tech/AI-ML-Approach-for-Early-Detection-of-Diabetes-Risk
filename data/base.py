@@ -106,6 +106,3 @@ about_diabets = """
 """
 
 
-warn = """
-This project (model) was created for learning purposes, the model may make mistakes. Please trust only qualified experts.
-"""
